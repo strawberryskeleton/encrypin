@@ -99,7 +99,7 @@ function initaliseGame () {
     printToScreen(' clear : clear the output console')
     printToScreen(' hint : get a hint. but beware, the digit is randomly revealed and depends on your luck. it also costs you 2 attempts.')
     printToScreen('----------------------------------------------------------------------------------------------------------------------')
-    userInput.disabled = false
+    // userInput.disabled = false
 }
 
 initaliseGame()
@@ -146,7 +146,7 @@ function evaluateGuess (guess) {
         printToScreen('----------------------------------------------------------------------------------------------------------------------')
         printToScreen('----------------------------------------------------------------------------------------------------------------------')
 
-        userInput.disabled = true
+        // userInput.disabled = true
 
         printToScreen('Reloading Game....')
         printToScreen(' ')
