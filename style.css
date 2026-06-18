@@ -10,28 +10,31 @@ body {
     font-family: monospace;
     font-size: 14px;
     /* padding: 20px; */
-    display: flex;
+    /* display: flex; */
     /* justify-content: center; */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #overlay {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: -20;
     padding: 0;
 }
 
 #terminal {
     width: 100%;
-    max-width: 650px;
+    /* max-width: 650px; */
     /* background-color: brown; */
     padding: 20px;
 }
 
 #output-log {
-    height: 350px;
+    height: 600px;
     overflow-y: auto;
     margin-bottom: 15px;
     white-space: pre-wrap;
@@ -46,7 +49,8 @@ body {
     color: #33ff33;
 }
 
-input {
+input,
+input:active {
     background: none;
     border: none;
     color: #33ff33;

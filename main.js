@@ -22,6 +22,7 @@ userInput.addEventListener("keydown", (ev) => {
         if (guess == SECRET_PIN) {
             // console.log('cracked')
             printToScreen('cracked')
+            userInput.disabled = true
         } else {
             // console.log('try again')
             printToScreen('try again')
@@ -33,3 +34,12 @@ function printToScreen (text) {
     outputLog.innerHTML += `<div>${text}</div>`
     outputLog.scrollTop = outputLog.scrollHeight
 }
+
+function initaliseGame () {
+    printToScreen('Welcome to game')
+    printToScreen('Crack the code access the contents')
+    printToScreen('Input a 4 digit pin to start guessing, you have 10 attempts before the alarm starts ringing')
+    printToScreen('-------------------------------------------------------------------------------------------')
+}
+
+initaliseGame()
