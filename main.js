@@ -1,5 +1,6 @@
 
-const SECRET_PIN = '1234'
+const SECRET_PIN = String(Math.floor((Math.random() + 1) * 1000))
+console.log('secret pin' + SECRET_PIN)
 let attemptsLeft = 10
 
 const outputLog = document.getElementById('output-log')
