@@ -22,14 +22,15 @@ userInput.addEventListener("keydown", (ev) => {
             return
         }
 
-        if (guess == SECRET_PIN) {
-            // console.log('cracked')
-            printToScreen('cracked')
-            userInput.disabled = true
-        } else {
-            // console.log('try again')
-            printToScreen('try again')
-        }
+        // if (guess == SECRET_PIN) {
+        //     // console.log('cracked')
+        //     printToScreen('cracked')
+        //     userInput.disabled = true
+        //     initaliseGame()
+        // } else {
+        //     // console.log('try again')
+        //     printToScreen('try again')
+        // }
 
         evaluateGuess(guess)
     }
@@ -45,6 +46,7 @@ function initaliseGame () {
     printToScreen('Crack the code access the contents')
     printToScreen('Input a 4 digit pin to start guessing, you have 10 attempts before the alarm starts ringing')
     printToScreen('-------------------------------------------------------------------------------------------')
+    userInput.disabled = false
 }
 
 initaliseGame()
@@ -84,6 +86,8 @@ function evaluateGuess (guess) {
 
     if (correctPos == 4) {
         printToScreen('success')
+        userInput.disabled = true
+        initaliseGame()
     } else if (attemptsLeft <= 0) {
         printToScreen('no more attempts left')
     } else {
