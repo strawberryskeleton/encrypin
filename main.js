@@ -9,6 +9,7 @@ const userInput = document.getElementById('user-input')
 
 userInput.addEventListener("keydown", (ev) => {
     // console.log(ev.key)
+    playBeep(800, 0.1)
 
     if (ev.key == 'Enter') {
         // console.log('received')
@@ -16,6 +17,7 @@ userInput.addEventListener("keydown", (ev) => {
         let guess = userInput.value
         userInput.value = ''
 
+        playBeep(800, 0.1)
         printToScreen('> [your input] ' + guess)
 
 
@@ -38,6 +40,7 @@ userInput.addEventListener("keydown", (ev) => {
 
         if (guess.length != 4 || isNaN(guess)) {
             // console.log('error')
+            playBeep(150, 0.3)
             printToScreen('error')
             printToScreen(' ')
             return
@@ -124,6 +127,8 @@ function evaluateGuess (guess) {
     }
 
     if (correctPos == 4) {
+        playBeep(1200, 0.15)
+        playBeep(1500, 0.3)
         printToScreen('You Cracked the Code Successfully!!')
         printToScreen('The GRAND SECRET IS....')
         printToScreen('uh oh! file corrupted! the great grand secret cannot be revealed!')
@@ -137,6 +142,7 @@ function evaluateGuess (guess) {
         initaliseGame()
 
     } else if (attemptsLeft <= 0) {
+        playBeep(150, 0.3)
         printToScreen('No More Attempts Left!')
         printToScreen('You could not crack the code. Now you will never know the grand secret.')
         printToScreen(' ')
@@ -148,6 +154,7 @@ function evaluateGuess (guess) {
         initaliseGame()
 
     } else {
+        playBeep(150, 0.3)
         printToScreen('Incorrect PIN! Can not access the secret!')
         printToScreen(`${correctPos} DIGITS LOCKED | ${wrongPos} DIGITS VULNERABLE`)
         printToScreen(`Attempts Left: ${attemptsLeft}`)
@@ -190,4 +197,23 @@ function getAttemptStatus () {
     }
 
     return statuses[attemptsLeft] || ` `
+}
+
+function playBeep (frequency, duration) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    const oscillator = audioCtx.createOscillator()
+    const gainNode = audioCtx.createGain()
+
+    oscillator.type = 'square'
+    oscillator.frequency.value = frequency
+
+    oscillator.connect(gainNode)
+    gainNode.connect(audioCtx.destination)
+
+    oscillator.start()
+
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration)
+
+    oscillator.stop(audioCtx.currentTime + duration)
 }
