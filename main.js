@@ -16,12 +16,6 @@ userInput.addEventListener("keydown", (ev) => {
         let guess = userInput.value
         userInput.value = ''
 
-        if (guess.length != 4 || isNaN(guess)) {
-            // console.log('error')
-            printToScreen('error')
-            return
-        }
-
         // if (guess == SECRET_PIN) {
         //     // console.log('cracked')
         //     printToScreen('cracked')
@@ -31,6 +25,28 @@ userInput.addEventListener("keydown", (ev) => {
         //     // console.log('try again')
         //     printToScreen('try again')
         // }
+
+        if (guess.toLowerCase() == 'clear') {
+            outputLog.innerHTML = ''
+            return
+        }
+
+        if (guess.toLowerCase() == 'help') {
+            printToScreen("explanation of the terms")
+            return
+        }
+
+        if (guess.toLowerCase() == 'hint') {
+            printToScreen('fine whatever')
+            giveHint()
+            return
+        }
+
+        if (guess.length != 4 || isNaN(guess)) {
+            // console.log('error')
+            printToScreen('error')
+            return
+        }
 
         evaluateGuess(guess)
     }
@@ -95,4 +111,20 @@ function evaluateGuess (guess) {
         printToScreen(`${correctPos} locked | ${wrongPos} vulnerable`)
         // console.log(correctPos, wrongPos)
     }
+}
+
+function giveHint () {
+    if (attemptsLeft <= 3) {
+        printToScreen('hint denied. diy you fool')
+        return
+    }
+
+    attemptsLeft -= 2
+
+    let randomIndex = Math.floor(Math.random() * 4)
+    let revealedDigit = SECRET_PIN[randomIndex]
+
+    printToScreen('finr but it will cost you 2 attempts')
+    printToScreen(`${revealedDigit} is at position ${randomIndex + 1}`)
+    printToScreen(`remaining attempts: ${attemptsLeft}`)
 }
