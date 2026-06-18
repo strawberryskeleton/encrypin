@@ -63,9 +63,52 @@ userInput.addEventListener("keydown", (ev) => {
     }
 })
 
+let messageQueue = []
+let isTyping = false
+const TYPING_SPEED = 20
+
 function printToScreen (text) {
-    outputLog.innerHTML += `<div>${text}</div>`
-    outputLog.scrollTop = outputLog.scrollHeight
+    // outputLog.innerHTML += `<div>${text}</div>`
+    // outputLog.scrollTop = outputLog.scrollHeight
+    messageQueue.push(text)
+
+    if(!isTyping) {
+        processQueue()
+    }
+}
+
+function processQueue () {
+    if(messageQueue.length === 0) {
+        isTyping = false
+        return
+    }
+
+    isTyping = true
+    let nextMessage = messageQueue.shift()
+
+    let line = document.createElement('div')
+    outputLog.appendChild(line)
+
+    let charIndex = 0
+
+    function typeNextChar () {
+        if (charIndex < nextMessage.length) {
+            line.innerHTML += nextMessage.charAt(charIndex)
+            charIndex++
+
+            if (nextMessage.charAt(charIndex - 1) != ' ') {
+                playBeep(600, 0.02)
+            }
+
+            outputLog.scrollTop = outputLog.scrollHeight
+
+            setTimeout(typeNextChar, TYPING_SPEED)
+        } else {
+            setTimeout(processQueue, 150)
+        }
+    }
+
+    typeNextChar()
 }
 
 function initaliseGame () {
@@ -76,21 +119,13 @@ function initaliseGame () {
     printToScreen(`
        ______________________________________________________________
      .'  __________________________________________________________  '.
-     : .'                                                          '. :
-     | |      ________________________________________________      | |
      | |    .:________________________________________________:.    | |
      | |    |                                                  |    | |
-     | |    |                                                  |    | |
-     | |    |                Enter the PIN:                    |    | |
-     | |    |                                                  |    | |
+     | |    |                Enter the PIN:                    |    | ||
      | |    |                                                  |    | |
      | |    |                [-] [-] [-] [-]                   |    | |
      | |    |                                                  |    | |
-     | |    |                                                  |    | |
-     | |    |            __________________________            |    | |
-     | |    |           |  |  |  |  |  |  |  |  |  |           |    | |
-     | |    '.__________|__|__|__|__|__|__|__|__|__|__________.'    | |
-     | |                                                            | |
+     | |    '.________________________________________________.'    | |
      : '.__________________________________________________________.' :
       ".____________________________________________________________."
 
