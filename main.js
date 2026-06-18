@@ -2,6 +2,7 @@
 const SECRET_PIN = String(Math.floor((Math.random() + 1) * 1000))
 console.log('secret pin ' + SECRET_PIN)
 let attemptsLeft = 10
+let audioCtx = null
 
 const outputLog = document.getElementById('output-log')
 const userInput = document.getElementById('user-input')
@@ -211,7 +212,14 @@ function getAttemptStatus () {
 }
 
 function playBeep (frequency, duration) {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    }
+
+    if (audioCtx.state == 'suspended') {
+        audioCtx.resume()
+    }
+
     const oscillator = audioCtx.createOscillator()
     const gainNode = audioCtx.createGain()
 
