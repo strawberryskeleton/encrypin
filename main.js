@@ -27,7 +27,17 @@ userInput.addEventListener("keydown", (ev) => {
         }
 
         if (guess.toLowerCase() == 'help') {
-            printToScreen("explanation of the terms + rules")
+            // printToScreen("explanation of the terms + rules")
+            printToScreen('Objective of the game: Crack a secret 4-digit pin to get access to a grand secret')
+            printToScreen('How To Play: ')
+            printToScreen('   - Type your guess in the Input Field')
+            printToScreen('   - LOCKED Digits --> digits which are correct and are correctly placed')
+            printToScreen('   - VUlNERABLE Digits --> digits which are correct but are incorrectly placed')
+            printToScreen('   - You have 10 ATTEMPTS to guess the PIN')
+            printToScreen('Available Commands: ')
+            printToScreen(' help : show game rules and explanantion')
+            printToScreen(' clear : clear the output console')
+            printToScreen(' hint : get a hint. but beware, the digit is randomly revealed and depends on your luck. it also costs you 2 attempts.')
             printToScreen(' ')
             return
         }
@@ -41,7 +51,8 @@ userInput.addEventListener("keydown", (ev) => {
         if (guess.length != 4 || isNaN(guess)) {
             // console.log('error')
             playBeep(150, 0.3)
-            printToScreen('error')
+            printToScreen('Invalid Guess or Command!')
+            printToScreen('Check for any typo in the command! The PIN is 4 digits long. Enter the guessed 4 digits only without any spaces.')
             printToScreen(' ')
             return
         }
