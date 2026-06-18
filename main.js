@@ -78,8 +78,12 @@ function printToScreen (text) {
 }
 
 function processQueue () {
+    userInput.ariaDisabled = true
+
     if(messageQueue.length === 0) {
         isTyping = false
+        userInput.ariaDisabled = false
+        userInput.focus()
         return
     }
 
@@ -121,7 +125,7 @@ function initaliseGame () {
      .'  __________________________________________________________  '.
      | |    .:________________________________________________:.    | |
      | |    |                                                  |    | |
-     | |    |                Enter the PIN:                    |    | ||
+     | |    |                Enter the PIN:                    |    | |
      | |    |                                                  |    | |
      | |    |                [-] [-] [-] [-]                   |    | |
      | |    |                                                  |    | |
@@ -135,7 +139,7 @@ function initaliseGame () {
     printToScreen(' clear : clear the output console')
     printToScreen(' hint : get a hint. but beware, the digit is randomly revealed and depends on your luck. it also costs you 2 attempts.')
     printToScreen('----------------------------------------------------------------------------------------------------------------------')
-    // userInput.disabled = false
+    userInput.ariaDisabled = false
 }
 
 initaliseGame()
@@ -182,7 +186,7 @@ function evaluateGuess (guess) {
         printToScreen('----------------------------------------------------------------------------------------------------------------------')
         printToScreen('----------------------------------------------------------------------------------------------------------------------')
 
-        // userInput.disabled = true
+        userInput.ariaDisabled = true
 
         printToScreen('Reloading Game....')
         printToScreen(' ')
