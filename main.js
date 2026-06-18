@@ -1,6 +1,6 @@
 
 const SECRET_PIN = String(Math.floor((Math.random() + 1) * 1000))
-console.log('secret pin' + SECRET_PIN)
+console.log('secret pin ' + SECRET_PIN)
 let attemptsLeft = 10
 
 const outputLog = document.getElementById('output-log')
@@ -16,15 +16,8 @@ userInput.addEventListener("keydown", (ev) => {
         let guess = userInput.value
         userInput.value = ''
 
-        // if (guess == SECRET_PIN) {
-        //     // console.log('cracked')
-        //     printToScreen('cracked')
-        //     userInput.disabled = true
-        //     initaliseGame()
-        // } else {
-        //     // console.log('try again')
-        //     printToScreen('try again')
-        // }
+        printToScreen('> ' + guess)
+
 
         if (guess.toLowerCase() == 'clear') {
             outputLog.innerHTML = ''
@@ -32,12 +25,12 @@ userInput.addEventListener("keydown", (ev) => {
         }
 
         if (guess.toLowerCase() == 'help') {
-            printToScreen("explanation of the terms")
+            printToScreen("explanation of the terms + rules")
             return
         }
 
         if (guess.toLowerCase() == 'hint') {
-            printToScreen('fine whatever')
+            // printToScreen('fine whatever')
             giveHint()
             return
         }
