@@ -14,14 +14,22 @@ userInput.addEventListener("keydown", (ev) => {
         userInput.value = ''
 
         if (guess.length != 4) {
-            console.log('error')
+            // console.log('error')
+            printToScreen('error')
             return
         }
 
         if (guess == SECRET_PIN) {
-            console.log('cracked')
+            // console.log('cracked')
+            printToScreen('cracked')
         } else {
-            console.log('try again')
+            // console.log('try again')
+            printToScreen('try again')
         }
     }
 })
+
+function printToScreen (text) {
+    outputLog.innerHTML += `<div>${text}</div>`
+    outputLog.scrollTop = outputLog.scrollHeight
+}
