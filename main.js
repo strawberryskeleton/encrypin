@@ -149,7 +149,9 @@ function evaluateGuess (guess) {
 
     } else {
         printToScreen('Incorrect PIN! Can not access the secret!')
-        printToScreen(`${correctPos} digits locked | ${wrongPos} digits vulnerable`)
+        printToScreen(`${correctPos} DIGITS LOCKED | ${wrongPos} DIGITS VULNERABLE`)
+        printToScreen(`Attempts Left: ${attemptsLeft}`)
+        printToScreen(getAttemptStatus())
         printToScreen(' ')
         // console.log(correctPos, wrongPos)
     }
@@ -172,4 +174,20 @@ function giveHint () {
     printToScreen(`${revealedDigit} is at position ${randomIndex + 1}`)
     printToScreen(`Remaining Attempts: ${attemptsLeft}`)
     printToScreen(' ')
+}
+
+function getAttemptStatus () {
+    const statuses = {
+        9: "The game has just begun, and your already behind! Can you crack the code?",
+        8: "Oh no! Another incorrect attempt! Your attempts are depleting!",
+        7: "Now I'm getting doubtful of your abilities!",
+        6: "You are nearing the attempt limit! Think think think!",
+        5: "You have exhausted half the attempts! Use your wits, or you'll never know the secret!",
+        4: "Last chance to take a HINT! Think before you make the next move!",
+        3: "You are running out of attempts! Think again before making a guess!",
+        2: "Try your best! Not enough chances are left for you!",
+        1: "It's NOW OR NEVER! Last Chance to know the Grand Secret!",
+    }
+
+    return statuses[attemptsLeft] || ` `
 }
