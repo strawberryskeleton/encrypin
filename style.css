@@ -3,3 +3,59 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-color: #333;
+    color: #33ff33;
+    font-family: monospace;
+    font-size: 14px;
+    /* padding: 20px; */
+    display: flex;
+    /* justify-content: center; */
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -20;
+    padding: 0;
+}
+
+#terminal {
+    width: 100%;
+    max-width: 650px;
+    /* background-color: brown; */
+    padding: 20px;
+}
+
+#output-log {
+    height: 350px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    border-bottom: 1px dashed #22aa22;
+    padding-bottom: 10px;
+}
+
+#input-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #33ff33;
+}
+
+input {
+    background: none;
+    border: none;
+    color: #33ff33;
+    font-family: monospace;
+    font-size: 14px;
+    outline: none;
+    flex-grow: 1;
+}
+
+.glow {
+    text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+}
